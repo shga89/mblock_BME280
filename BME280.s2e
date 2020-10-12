@@ -1,0 +1,95 @@
+{	"extensionName": "BME280/BMP280 습도, 기압, 고도 센서",
+	"description": "BME280 센서에 대한 엠블럭 확장 블럭입니다. BMP280 사용시 습도값은 불러올 수 없습니다. SparkFunBME280 라이브러리를 기반으로 제작되었으며, 이 확장 블럭 또한 GPL 3.0을 따릅니다.",
+	"version": "0.1",
+	"author": "Gaduino",
+	"homepage": "http://www.github.com/shga89",
+	"sort":0,
+	"javascriptURL":"js/BME280.js",
+    "firmware":"1.0",
+    "extensionPort":0,
+	"blockSpecs": [
+		[
+			"w",
+			"Initialize BME280: I2C (SDA=A4, SCL=A5)",
+			"BME280Init",
+			{
+				"setup":"",
+				"inc":"#include \"SparkFunBME280.h\"\n#include <SPI.h>\n",
+				"def":"
+/******** BME280 Define ********\/
+BME280 I2C_BME280;
+\/******************************\/\n",
+				"work":"
+Wire.begin();
+I2C_BME280.settings.I2CAddress = 0x76;
+if (I2C_BME280.beginI2C() == false) //Begin communication over I2C
+{
+Serial.println(\"BME280 sensor did not respond. Please check wiring.\");
+while(1); // 멈춤
+}\n",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"Read Humidity(%) from BME280",
+			"BME280Humidity",
+			"",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"I2C_BME280.readFloatHumidity()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"Read Pressure(hPa) from BME280",
+			"BME280Pressure",
+			"",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"I2C_BME280.readFloatPressure()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"Read Altitude(m) from BME280",
+			"BME280Altitude",
+			"",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"I2C_BME280.readFloatAltitudeMeters()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"Read Temperature(℃) from BME280",
+			"BME280Temperature",
+			"",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"I2C_BME280.readTempC()",
+				"loop":""
+			}
+		]
+	],
+	"translators":{
+		"ko":{
+			"Initialize BME280: I2C (SDA=A4, SCL=A5)":"BME280 센서 초기화: I2C (SDA=A4, SCL=A5)",
+			"Read Humidity(%) from BME280":"BME280에서 습도(%) 읽기",
+			"Read Pressure(hPa) from BME280":"BME280에서 압력(hPa) 읽기",
+			"Read Altitude(m) from BME280":"BME280에서 고도(m) 읽기",
+			"Read Temperature(℃) from BME280":"BME280에서 온도(℃) 읽기"
+		}		
+	}
+}
