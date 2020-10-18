@@ -37,7 +37,7 @@ TODO:
 #endif
 
 #include <Wire.h>
-#include <SPI.h>
+#include "SPI.h"
 
 //Uncomment the following line to enable software I2C
 //You will need to have the SoftwareWire library installed
